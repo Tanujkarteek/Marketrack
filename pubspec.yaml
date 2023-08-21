@@ -1,7 +1,7 @@
 name: market_rack
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -12,9 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
   flutter_dotenv: ^5.0.2
+  #third party packages
+  #for pin input
+  pinput: ^3.0.0
+  #for bloc
+  flutter_bloc: ^8.1.3
 
 dev_dependencies:
   flutter_test:
@@ -22,16 +26,14 @@ dev_dependencies:
 
   flutter_lints: ^1.0.0
 
-
 flutter:
-
   uses-material-design: true
 
-
   assets:
-    - assets/
+    - assets/logo/
+    - assets/icon/
+    - assets/font/
     - .env.dev
-    - .env.prod
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -44,17 +46,37 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: InterTight
+      fonts:
+        - asset: assets/font/InterTight-Light.ttf
+          weight: 300
+        - asset: assets/font/InterTight-Regular.ttf
+          weight: 400
+        - asset: assets/font/InterTight-Medium.ttf
+          weight: 500
+        - asset: assets/font/InterTight-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/InterTight-Bold.ttf
+          weight: 700
+        - asset: assets/font/InterTight-ExtraBold.ttf
+          weight: 800
+        - asset: assets/font/InterTight-Black.ttf
+          weight: 900
+    - family: Arcon
+      fonts:
+        - asset: assets/font/Arcon-Regular.otf
+          weight: 400
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+#     - family: Trajan Pro
+#       fonts:
+#         - asset: fonts/TrajanPro.ttf
+#         - asset: fonts/TrajanPro_Bold.ttf
+#           weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
