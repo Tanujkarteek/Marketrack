@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_rack/bloc/login_bloc/login_states.dart';
 import 'package:market_rack/constants/color.dart';
+import 'package:provider/provider.dart';
 import '../../bloc/login_bloc/login_bloc.dart';
 import '../../bloc/login_bloc/login_events.dart';
+import '../../bloc/shared_data_bloc.dart';
 import '../../constants/asset_name.dart';
 import '../components/dashed_underline.dart';
 
@@ -31,15 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<LoginBloc, LoginStates>(
       bloc: loginBloc,
       listenWhen: (previous, current) => current is LoginActionStates,
-      buildWhen: (previous, current) => current is !LoginActionStates,
+      buildWhen: (previous, current) => current is! LoginActionStates,
       listener: (context, state) {
         if (state is PhoneAuthCodeSentSuccess) {
           Navigator.pushNamed(context, '/verify');
-
         }
         if (state is PhoneAuthCodeSentFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text("error"),
             ),
           );
@@ -192,8 +193,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           onPressed: () {
                             //Navigator.pushNamed(context, '/verify');
+                            final sharedDataBloc = Provider.of<SharedDataBloc>(
+                                context,
+                                listen: false);
+                            sharedDataBloc
+                                .updatePhoneNumber(mobileController.text);
+                            sharedDataBloc
+                                .updateCountryCode(countryController.text);
                             loginBloc.add(
-                              SendOtpToPhone(),
+                              SendOtpToPhone(
+                                phone: mobileController.text,
+                                countryCode: countryController.text,
+                              ),
                             );
                           },
                           child: const Text(

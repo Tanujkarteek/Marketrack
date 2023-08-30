@@ -3,8 +3,10 @@ abstract class LoginEvents {
 }
 
 class SendOtpToPhone extends LoginEvents {
-  // final String phone;
-  // SendOtpToPhone({required this.phone});
+  final String countryCode;
+  final String phone;
+
+  SendOtpToPhone({required this.phone, required this.countryCode});
 }
 
 class OnPhoneOtpSent extends LoginEvents {
@@ -32,4 +34,3 @@ class OnPhoneOtpSent extends LoginEvents {
 //   final String verificationId;
 //   OnPhoneAuthSuccess({required this.verificationId});
 // }
-
